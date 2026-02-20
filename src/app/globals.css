@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  /* PawStay Color Palette */
+  --ps-bg: #F8FAFC;
+  --ps-surface: #FFFFFF;
+  --ps-surface-alt: #F1F5F9;
+  --ps-border: #E2E8F0;
+  --ps-text: #0F172A;
+  --ps-text-secondary: #64748B;
+  --ps-accent: #0D9488;
+  --ps-accent-hover: #0F766E;
+  --ps-accent-light: #CCFBF1;
+  --ps-accent-bg: #F0FDFA;
+  --ps-navy: #1E3A5F;
+  --ps-navy-light: #EFF6FF;
+  --ps-amber: #F59E0B;
+  --ps-amber-light: #FEF3C7;
+  --ps-green: #16A34A;
+  --ps-green-light: #DCFCE7;
+  --ps-warm-gray: #94A3B8;
+  --ps-error: #DC2626;
+  --ps-error-light: #FEF2F2;
+}
+
+@theme inline {
+  --color-background: var(--ps-bg);
+  --color-foreground: var(--ps-text);
+  --color-surface: var(--ps-surface);
+  --color-surface-alt: var(--ps-surface-alt);
+  --color-border-custom: var(--ps-border);
+  --color-text-secondary: var(--ps-text-secondary);
+  --color-accent: var(--ps-accent);
+  --color-accent-hover: var(--ps-accent-hover);
+  --color-accent-light: var(--ps-accent-light);
+  --color-accent-bg: var(--ps-accent-bg);
+  --color-navy: var(--ps-navy);
+  --color-navy-light: var(--ps-navy-light);
+  --color-amber: var(--ps-amber);
+  --color-amber-light: var(--ps-amber-light);
+  --color-ps-green: var(--ps-green);
+  --color-ps-green-light: var(--ps-green-light);
+  --color-warm-gray: var(--ps-warm-gray);
+  --color-error: var(--ps-error);
+  --color-error-light: var(--ps-error-light);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ps-bg);
+  color: var(--ps-text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Date picker */
+.rdp {
+  --rdp-accent-color: var(--ps-accent);
+  --rdp-background-color: var(--ps-accent-light);
+}
+.rdp-day_selected:not(.rdp-day_disabled) {
+  background-color: var(--ps-accent) !important;
+  color: white !important;
+}
+.rdp-day_range_middle {
+  background-color: var(--ps-accent-light) !important;
+  color: var(--ps-text) !important;
+}
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ps-surface-alt); }
+::-webkit-scrollbar-thumb { background: var(--ps-warm-gray); border-radius: 3px; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--ps-surface-alt) 25%, var(--ps-border) 50%, var(--ps-surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
