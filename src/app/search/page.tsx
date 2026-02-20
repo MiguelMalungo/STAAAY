@@ -6,6 +6,7 @@ import Image from "next/image";
 import HotelCardSkeleton from "@/components/HotelCardSkeleton";
 import { HotelBrief, PetSpecies } from "@/lib/types";
 import { PawPrint, ArrowLeft, Building2, ArrowRight, Star } from "lucide-react";
+import { searchHotels } from "@/lib/mockData";
 
 const SPECIES_ICONS: Record<string, string> = {
   dog: "🐕", cat: "🐈", bird: "🦜", rabbit: "🐇",
@@ -39,18 +40,29 @@ function SearchResults() {
     setLoading(true);
     setError("");
     try {
-      const params = new URLSearchParams();
-      if (placeName) params.set("city", placeName);
-      if (petType) params.set("petType", petType);
-      if (serviceType) params.set("serviceType", serviceType);
+      let hotels: HotelBrief[] = [];
+      try {
+        const params = new URLSearchParams();
+        if (placeName) params.set("city", placeName);
+        if (petType) params.set("petType", petType);
+        if (serviceType) params.set("serviceType", serviceType);
+        const res = await fetch(`/api/hotels?${params.toString()}`);
+        if (res.ok) {
+          const data = await res.json();
+          hotels = data.hotels ?? [];
+        } else {
+          throw new Error("API unavailable");
+        }
+      } catch {
+        // Fallback to mock data (used in static export / GitHub Pages)
+        const results = searchHotels({ city: placeName, petType: petType as PetSpecies, serviceType });
+        hotels = results.map(({ description: _d, photos: _p, ...brief }) => brief);
+      }
 
-      const res = await fetch(`/api/hotels?${params.toString()}`);
-      const data = await res.json();
-
-      if (!data.hotels || data.hotels.length === 0) {
+      if (hotels.length === 0) {
         setError("No pet hotels found for your search. Try a different city or adjust your filters.");
       } else {
-        setHotels(data.hotels);
+        setHotels(hotels);
       }
     } catch {
       setError("Something went wrong. Please try again.");

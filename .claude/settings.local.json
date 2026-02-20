@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(python3:*)",
+      "Bash(node -e:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+      "Bash(lsof:*)",
+      "Bash(npm --prefix /Users/josemiguelferrazguedes/pawstay run dev)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(/Users/josemiguelferrazguedes/pawstay/.gitignore << 'EOF'\nnode_modules/\n.next/\n.env.local\n.env*.local\ntsconfig.tsbuildinfo\n.DS_Store\nEOF)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(gh run list:*)",
+      "Bash(curl:*)",
+      "Bash(npm run build:*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}

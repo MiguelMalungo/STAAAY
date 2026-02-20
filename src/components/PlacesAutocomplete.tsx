@@ -26,6 +26,16 @@ export default function PlacesAutocomplete({ onSelect, selected }: Props) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const MOCK_CITIES: Place[] = [
+    { placeId: "miami-fl", displayName: "Miami", formattedAddress: "Miami, FL, USA" },
+    { placeId: "new-york-ny", displayName: "New York", formattedAddress: "New York, NY, USA" },
+    { placeId: "los-angeles-ca", displayName: "Los Angeles", formattedAddress: "Los Angeles, CA, USA" },
+    { placeId: "chicago-il", displayName: "Chicago", formattedAddress: "Chicago, IL, USA" },
+    { placeId: "austin-tx", displayName: "Austin", formattedAddress: "Austin, TX, USA" },
+    { placeId: "denver-co", displayName: "Denver", formattedAddress: "Denver, CO, USA" },
+    { placeId: "brooklyn-ny", displayName: "Brooklyn", formattedAddress: "Brooklyn, NY, USA" },
+  ];
+
   const search = useCallback(async (q: string) => {
     if (q.length < 2) {
       setResults([]);
@@ -33,9 +43,22 @@ export default function PlacesAutocomplete({ onSelect, selected }: Props) {
     }
     setLoading(true);
     try {
-      const res = await fetch(`/api/places?q=${encodeURIComponent(q)}`);
-      const data = await res.json();
-      setResults(data.data || []);
+      let places: Place[] = [];
+      try {
+        const res = await fetch(`/api/places?q=${encodeURIComponent(q)}`);
+        if (res.ok) {
+          const data = await res.json();
+          places = data.data || [];
+        } else {
+          throw new Error("API unavailable");
+        }
+      } catch {
+        // Fallback to mock cities (used in static export / GitHub Pages)
+        places = MOCK_CITIES.filter((c) =>
+          c.displayName.toLowerCase().includes(q.toLowerCase())
+        );
+      }
+      setResults(places);
       setOpen(true);
     } catch {
       setResults([]);

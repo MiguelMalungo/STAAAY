@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
+import { MOCK_HOTELS } from "@/lib/mockData";
 import Image from "next/image";
 import { HotelDetail } from "@/lib/types";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -31,7 +32,7 @@ const POLICY_LABELS: Record<string, string> = {
   strict: "Strict — No refund after booking",
 };
 
-export default function HotelDetailPage() {
+function HotelDetailContent() {
   const params = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -46,18 +47,9 @@ export default function HotelDetailPage() {
   const [activePhoto, setActivePhoto] = useState(0);
 
   useEffect(() => {
-    async function load() {
-      try {
-        const res = await fetch(`/api/hotels/${encodeURIComponent(slug)}`);
-        const data = await res.json();
-        setHotel(data.hotel);
-      } catch {
-        setHotel(null);
-      } finally {
-        setLoading(false);
-      }
-    }
-    load();
+    const found = MOCK_HOTELS.find((h) => h.slug === slug || h.id === slug) ?? null;
+    setHotel(found);
+    setLoading(false);
   }, [slug]);
 
   function bookService(serviceId: string) {
@@ -229,5 +221,13 @@ export default function HotelDetailPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function HotelDetailPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner message="Loading hotel details..." />}>
+      <HotelDetailContent />
+    </Suspense>
   );
 }
