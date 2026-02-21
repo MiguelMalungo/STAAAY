@@ -7,7 +7,7 @@ import { DateRange } from "react-day-picker";
 import PlacesAutocomplete from "@/components/PlacesAutocomplete";
 import DateRangePicker from "@/components/DateRangePicker";
 import { Place } from "@/lib/types";
-import { PawPrint, ShieldCheck, Star, Heart, ChevronDown, Search, Moon, Sun, Scissors, GraduationCap, Stethoscope, Footprints, Dog, Cat, Bird, Rabbit } from "lucide-react";
+import { PawPrint, ShieldCheck, Heart, ChevronDown, Search, Moon, Sun, Scissors, GraduationCap, Stethoscope, Footprints, Dog, Cat, Bird, Rabbit } from "lucide-react";
 
 const SPECIES_OPTIONS = [
   { value: "dog", label: "Dog", icon: <Dog className="w-4 h-4" /> },
@@ -232,29 +232,40 @@ export default function Home() {
               title: "Verified Facilities",
               desc: "Every listed hotel passes our verification process. Real photos, real reviews, no surprises.",
               bg: "from-accent-bg to-accent-light/30",
-            },
-            {
-              icon: <Star className="w-8 h-8 text-amber" />,
-              title: "All Species Welcome",
-              desc: "Dogs, cats, birds, reptiles, rabbits, and more. Filter by your exact pet type.",
-              bg: "from-amber-light to-amber-light/30",
+              img: "/images/verified.jpg",
             },
             {
               icon: <Heart className="w-8 h-8 text-ps-green" />,
               title: "Transparent Pricing",
               desc: "See exact prices before you book. No hidden fees, no surprises at checkout.",
               bg: "from-ps-green-light to-ps-green-light/30",
+              img: "/images/pricing.png",
             },
           ].map((f) => (
             <div
               key={f.title}
-              className={`bg-gradient-to-br ${f.bg} rounded-2xl border border-border-custom p-8 flex flex-col items-start`}
+              className={`group relative overflow-hidden bg-gradient-to-br ${f.bg} rounded-2xl border border-border-custom p-8 flex flex-col items-start min-h-[220px]`}
             >
-              <div className="p-3 bg-white rounded-xl shadow-sm mb-5">{f.icon}</div>
-              <h3 className="font-semibold text-xl mb-2">{f.title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">{f.desc}</p>
+              <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${f.img})`, opacity: 0.33 }} />
+              <div className="relative p-3 bg-white rounded-xl shadow-sm">{f.icon}</div>
+              <div className="relative mt-auto">
+                <h3 className="font-semibold text-xl mb-2">{f.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed font-semibold">{f.desc}</p>
+              </div>
             </div>
           ))}
+          {/* Run a pet hotel card */}
+          <div className="group relative overflow-hidden bg-gradient-to-br from-navy to-[#0D9488] rounded-2xl border border-border-custom p-8 flex flex-col items-start">
+            <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url(/images/run.png)", opacity: 0.33 }} />
+            <div className="relative p-3 bg-white/20 rounded-xl shadow-sm mb-5">
+              <PawPrint className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="relative font-semibold text-xl mb-2 text-white">Run a Pet Hotel?</h3>
+            <p className="relative text-sm text-white/80 leading-relaxed mb-6">Join hundreds of pet care professionals on PawStay. List your facility for free and start receiving bookings today.</p>
+            <button className="relative mt-auto px-5 py-2.5 bg-white text-navy font-semibold rounded-xl hover:bg-accent-light transition-colors text-sm">
+              List Your Hotel — It&apos;s Free
+            </button>
+          </div>
         </div>
       </section>
 
@@ -285,19 +296,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Operator CTA ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="bg-gradient-to-r from-navy to-[#0D9488] rounded-3xl p-10 text-center text-white">
-          <h2 className="text-3xl font-bold mb-3">Run a pet hotel?</h2>
-          <p className="text-white/80 text-lg mb-8 max-w-lg mx-auto">
-            Join hundreds of pet care professionals on PawStay. List your facility for free and start receiving bookings today.
-          </p>
-          <button className="px-8 py-3.5 bg-white text-navy font-semibold rounded-xl hover:bg-accent-light transition-colors">
-            List Your Hotel — It&apos;s Free
-          </button>
-          <p className="text-white/50 text-xs mt-4">No listing fees. Only a 10% platform fee on completed bookings.</p>
-        </div>
-      </section>
     </div>
   );
 }
