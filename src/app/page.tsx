@@ -9,6 +9,8 @@ import DateRangePicker from "@/components/DateRangePicker";
 import { Place } from "@/lib/types";
 import { PawPrint, ShieldCheck, Heart, ChevronDown, Search, Moon, Sun, Scissors, GraduationCap, Stethoscope, Footprints, Dog, Cat, Bird, Rabbit } from "lucide-react";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const SPECIES_OPTIONS = [
   { value: "dog", label: "Dog", icon: <Dog className="w-4 h-4" /> },
   { value: "cat", label: "Cat", icon: <Cat className="w-4 h-4" /> },
@@ -232,14 +234,14 @@ export default function Home() {
               title: "Verified Facilities",
               desc: "Every listed hotel passes our verification process. Real photos, real reviews, no surprises.",
               bg: "from-accent-bg to-accent-light/30",
-              img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/verified.jpg`,
+              img: `${BASE_PATH}/images/verified.jpg`,
             },
             {
               icon: <Heart className="w-8 h-8 text-ps-green" />,
               title: "Transparent Pricing",
               desc: "See exact prices before you book. No hidden fees, no surprises at checkout.",
               bg: "from-ps-green-light to-ps-green-light/30",
-              img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/pricing.png`,
+              img: `${BASE_PATH}/images/pricing.png`,
             },
           ].map((f) => (
             <div
@@ -256,7 +258,7 @@ export default function Home() {
           ))}
           {/* Run a pet hotel card */}
           <div className="group relative overflow-hidden bg-gradient-to-br from-navy to-[#0D9488] rounded-2xl border border-border-custom p-8 flex flex-col items-start">
-            <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_PATH}/images/run.png)`, opacity: 0.33 }} />
+            <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${BASE_PATH}/images/run.png)`, opacity: 0.33 }} />
             <div className="relative p-3 bg-white/20 rounded-xl shadow-sm mb-5">
               <PawPrint className="w-8 h-8 text-white" />
             </div>
