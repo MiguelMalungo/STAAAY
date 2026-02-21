@@ -233,14 +233,14 @@ export default function Home() {
               icon: <ShieldCheck className="w-8 h-8 text-accent" />,
               title: "Verified Facilities",
               desc: "Every listed hotel passes our verification process. Real photos, real reviews, no surprises.",
-              bg: "from-accent-bg to-accent-light/30",
+              bg: "from-navy to-[#0D9488]",
               img: `${BASE_PATH}/images/verified.jpg`,
             },
             {
               icon: <Heart className="w-8 h-8 text-ps-green" />,
               title: "Transparent Pricing",
               desc: "See exact prices before you book. No hidden fees, no surprises at checkout.",
-              bg: "from-ps-green-light to-ps-green-light/30",
+              bg: "from-navy to-[#0D9488]",
               img: `${BASE_PATH}/images/pricing.png`,
             },
           ].map((f) => (
