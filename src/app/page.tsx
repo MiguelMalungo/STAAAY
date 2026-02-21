@@ -248,17 +248,17 @@ export default function Home() {
               key={f.title}
               className={`group relative overflow-hidden bg-gradient-to-br ${f.bg} rounded-2xl border border-border-custom p-8 flex flex-col items-start min-h-[220px]`}
             >
-              <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${f.img})`, opacity: 0.33 }} />
+              <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${f.img})`, opacity: 0.44 }} />
               <div className="relative p-3 bg-white rounded-xl shadow-sm">{f.icon}</div>
               <div className="relative mt-auto">
-                <h3 className="font-semibold text-xl mb-2">{f.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed font-semibold">{f.desc}</p>
+                <h3 className="font-semibold text-xl mb-2 text-white">{f.title}</h3>
+                <p className="text-sm text-white/90 leading-relaxed font-semibold">{f.desc}</p>
               </div>
             </div>
           ))}
           {/* Run a pet hotel card */}
           <div className="group relative overflow-hidden bg-gradient-to-br from-navy to-[#0D9488] rounded-2xl border border-border-custom p-8 flex flex-col items-start">
-            <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${BASE_PATH}/images/run.png)`, opacity: 0.33 }} />
+            <div className="absolute inset-0 bg-cover bg-center rounded-2xl transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${BASE_PATH}/images/run.png)`, opacity: 0.44 }} />
             <div className="relative p-3 bg-white/20 rounded-xl shadow-sm mb-5">
               <PawPrint className="w-8 h-8 text-white" />
             </div>
